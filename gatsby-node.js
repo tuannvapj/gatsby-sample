@@ -9,11 +9,6 @@ exports.createPages = ({graphql, actions}) => {
     {
         allBook {
           nodes {
-            title
-            summary
-            author {
-              name
-            }
             id
           }
         }
@@ -22,12 +17,11 @@ exports.createPages = ({graphql, actions}) => {
         if(result.errors){
             throw result.errors;
         }
-
         result.data.allBook.nodes.forEach(book => {
             createPage({
                 path: `/book/${book.id}`,
                 component: bookTemplate,
-                context: book.summary
+                context: {bookId: book.id}
             })
         })
     })
