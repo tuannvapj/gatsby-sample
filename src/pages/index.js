@@ -22,6 +22,7 @@ const LinkButton = styled.div`
 `
 // markup
 const IndexPage = (props) => {
+  console.log(props);
   return (
     <Layout pageTitle="Home Page">
       {props.data.allBook.nodes.map(node => (

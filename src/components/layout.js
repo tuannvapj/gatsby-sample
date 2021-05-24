@@ -1,34 +1,33 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { 
-    container,
-    navLinks,
-    navLinkItem,
-    navLinkText
-} from './layout.module.css'
-
+import {useStaticQuery, graphql} from "gatsby";
+import Header from "./header"
+import { FirebaseContext, useAuth } from "./Firebase";
 import './layout.css'
 
 const Layout = ({pageTitle, children}) => {
+    const {user, firebase, loading} = useAuth();
+    const data = useStaticQuery(graphql`
+        query SiteTitleQuery {
+            site {
+                siteMetadata {
+                  title
+                  description
+                  author
+                }
+            }
+        }
+    `);
     return (
-        <main className={container}>
-            <title>{pageTitle}</title>
-            <nav>
-                <ul className={navLinks}>
-                    <li className={navLinkItem}>
-                        <Link className={navLinkText} to="/">
-                            Home
-                        </Link>
-                    </li>
-                    <li className={navLinkItem}>
-                        <Link className={navLinkText} to="/about">
-                            About
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-            {children}
-        </main>
+        <FirebaseContext.Provider value={{user, firebase, loading}}>
+            <Header siteTitle={data.site.siteMetadata.title}></Header>
+            <div style={{
+                margin: `0 auto`,
+                maxWidth: 960,
+                padding: `0px 1.0875rem 1.45rem`
+            }}>
+                <main>{children}</main>
+            </div>
+        </FirebaseContext.Provider>
     )
 }
 
