@@ -1,35 +1,95 @@
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import PropTypes from "prop-types";
-import React from "react";
+import React, {useContext} from "react";
 import { FirebaseContext } from "./Firebase";
 
+import styled from "styled-components";
+
+const LogoutLink = styled.span`
+    
+    color: white;
+    cursor: pointer;
+    float: right;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`
+const HeaderWrapper = styled.header`
+    background: rebeccapurple;
+    margin-bottom: 1.45rem;
+`
+
+const HeaderContent = styled.div`
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 1.45rem 1.0875rem;
+    display: flex;
+
+    >h1 {
+        margin: 0;
+        flex-grow: 1;
+
+        >a {
+            color: white;
+            text-decoration: none;
+        }
+    }
+    >div {
+        margin: 0;
+    }
+`
+
+const UserInfo = styled.div`
+    text-align: right;
+    color: white;
+`
+
+const LoginLink = styled.div`
+    margin: auto 0;
+    a {
+        color: white;
+        text-decoration: none;
+    }
+`
+
 const Header = ({ siteTitle }) => {
+    const {firebase, user} = useContext(FirebaseContext);
+    
+    function handleLogoutClick() {
+        firebase.logout().then(() => navigate('/'))
+    }
+
     return (
-        <header style={{
-            background: `rebeccapurple`,
-            marginBottom: `1.45rem`
-        }}>
-            <div style={{
-                margin: `0 auto`,
-                maxWidth: 960,
-                padding: `1.45rem 1.0875rem`
-            }}>
-                <h1 style={{ margin: 0 }}>
-                    <Link to="/" style={{
-                        color: `white`,
-                        textDecoration: `none`
-                    }}>
+        <HeaderWrapper>
+            <HeaderContent>
+                <h1>
+                    <Link to="/">
                         {siteTitle}
                     </Link>
                 </h1>
-                <FirebaseContext.Consumer>
-                    {props => {
-                        console.log(props);
-                        return <div />
-                    }}
-                </FirebaseContext.Consumer>
-            </div>
-        </header>
+                <div>
+                    {!!user && !!user.email &&
+                        <UserInfo>
+                            Hello, {user.email}
+                            <div>
+                            <LogoutLink onClick={handleLogoutClick}>
+                                Logout
+                            </LogoutLink>
+                            </div>
+                        </UserInfo>
+                    }
+                    {(!user || !user.email) &&
+                        <LoginLink>
+                            <Link to="/login">
+                                Login
+                            </Link>
+                        </LoginLink>
+                    }
+                </div>
+                
+            </HeaderContent>
+        </HeaderWrapper>
     )
 }
 

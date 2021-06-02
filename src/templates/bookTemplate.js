@@ -7,14 +7,14 @@ import {graphql} from 'gatsby';
 const BookTemplate = (probs) => {
     const book = probs.data.book;
     return (
-        <Layout>
+        <section>
             <BookItem 
                 bookCover={book.localImage.childImageSharp.fixed}
                 authorName={book.author.name}
                 bookTitle={book.title}
                 bookSummary={book.summary}
             />
-        </Layout>
+        </section>
     )
 }
 

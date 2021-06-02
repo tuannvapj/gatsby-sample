@@ -24,7 +24,7 @@ const LinkButton = styled.div`
 const IndexPage = (props) => {
   console.log(props);
   return (
-    <Layout pageTitle="Home Page">
+    <section>
       {props.data.allBook.nodes.map(node => (
         <BookItem
           bookCover={node.localImage.childImageSharp.fixed}
@@ -39,7 +39,7 @@ const IndexPage = (props) => {
             </LinkButton>
         </BookItem>
       ))}
-    </Layout>
+    </section>
   )
 }
 
