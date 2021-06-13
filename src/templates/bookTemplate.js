@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/layout'
 import BookItem from '../components/BookItem'
+import {BookComments} from '../components/common';
 import {graphql} from 'gatsby';
 
 
@@ -14,6 +15,7 @@ const BookTemplate = (probs) => {
                 bookTitle={book.title}
                 bookSummary={book.summary}
             />
+            <BookComments></BookComments>
         </section>
     )
 }

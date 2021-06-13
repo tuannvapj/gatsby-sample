@@ -77,7 +77,7 @@ const Header = ({ siteTitle }) => {
                 <div>
                     {!!user && !!user.email &&
                         <UserInfo>
-                            Hello, {user.email}
+                            Hello, {user.username || user.email}
                             <div>
                             <LogoutLink onClick={handleLogoutClick}>
                                 Logout
