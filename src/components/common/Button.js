@@ -7,6 +7,7 @@ export const Button = styled.button`
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
+    white-space: nowrap;
     
     ${props => props.block ? 'display: block; width: 100%;' : ''}
 
