@@ -24,6 +24,13 @@ class Firebase {
             .onSnapshot(onSnapshot);
     }
 
+    async createAuthor({authorName}){
+        const createAuthroCallable = this.functions.httpsCallable('createAuthor');
+        return createAuthroCallable({
+            authorName
+        })
+    }
+
     async register({email, password, username}){
         await this.auth.createUserWithEmailAndPassword(email, password);
         const createProfileCallable = this.functions.httpsCallable('createPublicProfile');

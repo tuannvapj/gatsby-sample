@@ -59,8 +59,15 @@ const Divider = styled.span`
     padding-right: 1px;
 `
 
+const AdminLink = styled.span`
+    a {
+        color: white;
+    }
+`
+
 const Header = ({ siteTitle }) => {
     const {firebase, user} = useContext(FirebaseContext);
+    console.log(user)
     
     function handleLogoutClick() {
         firebase.logout().then(() => navigate('/'))
@@ -79,6 +86,22 @@ const Header = ({ siteTitle }) => {
                         <UserInfo>
                             Hello, {user.username || user.email}
                             <div>
+                                {!!user.isAdmin &&
+                                <>
+                                    <AdminLink>
+                                    <Link to="/add-author">
+                                        Add author
+                                    </Link>
+                                    </AdminLink>
+                                    <Divider />
+                                    <AdminLink>
+                                    <Link to="/add-book">
+                                        Add book
+                                    </Link>
+                                    </AdminLink>
+                                    <Divider />
+                                </>
+                                }
                             <LogoutLink onClick={handleLogoutClick}>
                                 Logout
                             </LogoutLink>
