@@ -1,5 +1,4 @@
 import { Link, navigate } from "gatsby";
-import PropTypes from "prop-types";
 import React, {useContext} from "react";
 import { FirebaseContext } from "./Firebase";
 

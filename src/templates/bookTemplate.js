@@ -1,6 +1,5 @@
 import React, {useContext} from 'react'
-import Layout from '../components/layout'
-import BookItem from '../components/BookItem'
+import BookItem from '../components/BookItem';
 import {BookComments} from '../components/common';
 import {graphql} from 'gatsby';
 import { FirebaseContext } from '../components/Firebase';

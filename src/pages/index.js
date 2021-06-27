@@ -1,7 +1,5 @@
-import * as React from "react"
-import {Link, graphql} from 'gatsby'
-import Layout from "../components/layout";
-import Image from '../components/Image';
+import * as React from "react";
+import {Link, graphql} from 'gatsby';
 import BookItem from '../components/BookItem';
 import styled from 'styled-components';
 
